@@ -57,4 +57,46 @@ class TransformationsUtilsTest {
         // 実行内容の検証がすべて完了したことの確認
         confirmVerified(recorder)
     }
+
+    /**
+     * フォーム(名前、苗字)の両方が空でない時にのみ送信ボタンが押せるという仕様を想定した内容のテスト。
+     * ※ Unit test としては微妙だが、qiita 記事的にわかりやすいものにした。
+     */
+    @Test
+    fun map_forQiita2() {
+        // テストの実行経過を記録する Recorder の用意
+        val recorder = mockk<Recorder<Boolean>>(relaxed = true)
+
+        // 名前、苗字の MutableLiveData を用意
+        val firstName: MutableLiveData<String?> = MutableLiveData()
+        val lastName: MutableLiveData<String?> = MutableLiveData()
+        val forms = listOf(firstName, lastName)
+
+        // 送信ボタンが押せるかどうかの MutableLiveData を用意。
+        // ※名前、苗字の両方が空でない場合のみ true になる
+        val isSubmitButtonEnabled: LiveData<Boolean> =
+            TransformationsUtils.map(firstName, lastName) {
+                !forms.any { it.value.isNullOrEmpty() }
+            }
+
+        // 実行経過が Recorder に記録されるように準備
+        isSubmitButtonEnabled.observeForever { value ->
+            recorder.record(value)
+        }
+
+        // テストの実行
+        firstName.postValue("シャミ子")
+        lastName.postValue("吉田")
+
+        // 実行内容の検証
+        verify {
+            // firstName が "シャミ子" になったが lastName が null のため false
+            recorder.record(false)
+            // firstName が "シャミ子"、lastName が "吉田" になったため true
+            recorder.record(true)
+        }
+
+        // 実行内容の検証がすべて完了したことの確認
+        confirmVerified(recorder)
+    }
 }
