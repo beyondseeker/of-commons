@@ -1,13 +1,20 @@
 package com.objectfanatics.commons.androidx.lifecycle
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
 
 class TransformationsUtilsTest {
+    @Rule
+    @JvmField
+    val rule: TestRule = InstantTaskExecutorRule()
+
     interface Recorder<T> {
         fun record(value: T)
     }
