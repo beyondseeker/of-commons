@@ -1,8 +1,8 @@
 plugins {
-    Plugin_com_android_library
-    Plugin_kotlin_android_extensions
     Plugin_org_gradle_maven_publish
+    Plugin_com_android_library
     Plugin_org_jetbrains_kotlin_android
+    Plugin_kotlin_android_extensions
     Plugin_org_jetbrains_kotlin_kapt
 }
 
@@ -64,6 +64,15 @@ dependencies {
 
     androidTestImplementation(Deps.androidx_test_espresso__espresso_core)
     androidTestImplementation(Deps.androidx_test_ext__junit)
+
+    // for androidx.test.annotation.UiThreadTest
+    androidTestImplementation("androidx.test:rules:1.2.0")
+
+    // for Google Truth
+    androidTestImplementation("com.google.truth:truth:1.0.1")
+
+    // for AssertJ
+    androidTestImplementation("org.assertj:assertj-core:3.12.2")
 }
 
 tasks {
