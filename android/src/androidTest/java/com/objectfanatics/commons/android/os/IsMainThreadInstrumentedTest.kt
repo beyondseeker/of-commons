@@ -8,7 +8,7 @@ import org.hamcrest.MatcherAssert
 import org.junit.Assert
 import org.junit.Test
 
-class PackageKtInstrumentedTest {
+class IsMainThreadInstrumentedTest {
     /**
      * Running on worker thread.
      */
