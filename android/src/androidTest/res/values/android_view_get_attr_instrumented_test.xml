@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GetAttrInstrumentedTestView">
+        <attr name="nonNullIntegerValue" format="integer" />
+        <attr name="nonDefIntegerValue" format="integer" />
+
+        <attr name="nonNullStringValue" format="string" />
+        <attr name="nonDefStringValue" format="string" />
+
+        <attr name="nonNullBooleanValue" format="boolean" />
+        <attr name="nonDefBooleanValue" format="boolean" />
+
+        <attr name="nonNullFloatValue" format="float" />
+        <attr name="nonDefFloatValue" format="float" />
+
+        <attr name="nonNullLongValue" format="string" />
+        <attr name="nonDefLongValue" format="string" />
+
+        <attr name="nonNullIntegerArrayValue" format="reference" />
+        <attr name="nonDefIntegerArrayValue" format="reference" />
+
+        <attr name="nonNullStringArrayValue" format="reference" />
+        <attr name="nonDefStringArrayValue" format="reference" />
+
+        <!-- Attribute for null. It doesn't necessarily has to be string.  -->
+        <attr name="nullValue" format="string" />
+    </declare-styleable>
+
+    <string-array name="android_view_get_attr_instrumented_test_string_array">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+    </string-array>
+
+    <integer-array name="android_view_get_attr_instrumented_test_integer_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </integer-array>
+</resources>

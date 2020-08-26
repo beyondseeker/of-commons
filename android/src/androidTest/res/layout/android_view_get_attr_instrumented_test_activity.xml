@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.objectfanatics.commons.android.view.GetAttrInstrumentedTestView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/range_number_text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    app:nonNullBooleanValue="true"
+    app:nonNullIntegerValue="20"
+    app:nonNullFloatValue="20.0"
+    app:nonNullStringValue="あ"
+    app:nonNullLongValue="9223372036854775807"
+    app:nonNullIntegerArrayValue="@array/android_view_get_attr_instrumented_test_integer_array"
+    app:nonNullStringArrayValue="@array/android_view_get_attr_instrumented_test_string_array"
+
+    app:nullValue="@null" />
