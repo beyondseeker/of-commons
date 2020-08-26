@@ -62,17 +62,11 @@ dependencies {
     testImplementation(Deps.io_mockk__mockk)
     testImplementation(Deps.junit__junit)
 
+    androidTestImplementation(Deps.androidx_test__rules)
     androidTestImplementation(Deps.androidx_test_espresso__espresso_core)
     androidTestImplementation(Deps.androidx_test_ext__junit)
-
-    // for androidx.test.annotation.UiThreadTest
-    androidTestImplementation("androidx.test:rules:1.2.0")
-
-    // for Google Truth
-    androidTestImplementation("com.google.truth:truth:1.0.1")
-
-    // for AssertJ
-    androidTestImplementation("org.assertj:assertj-core:3.12.2")
+    androidTestImplementation(Deps.com_google_truth__truth)
+    androidTestImplementation(Deps.org_assertj__assertj_core)
 }
 
 tasks {
