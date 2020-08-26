@@ -67,6 +67,9 @@ dependencies {
     androidTestImplementation(Deps.androidx_test_ext__junit)
     androidTestImplementation(Deps.com_google_truth__truth)
     androidTestImplementation(Deps.org_assertj__assertj_core)
+
+    // for androidx.test.core.app.launchActivity
+    androidTestImplementation("androidx.test:core-ktx:1.3.0")
 }
 
 tasks {
