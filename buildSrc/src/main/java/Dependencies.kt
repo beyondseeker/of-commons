@@ -50,6 +50,7 @@ object Deps {
     const val androidx_core__core_ktx = "androidx.core:core-ktx:1.3.0"
     const val androidx_fragment__fragment = "androidx.fragment:fragment:1.3.0-alpha06" // 1.3.0-alpha06 より前のバージョンだと、registerForActivityResult を利用した際に 'java.lang.IllegalArgumentException: Can only use lower 16 bits for requestCode' というエラーで落ちるので注意！
     const val androidx_lifecycle__lifecycle_livedata = "androidx.lifecycle:lifecycle-livedata:2.3.0-alpha05"
+    const val androidx_test__core_ktx = "androidx.test:core-ktx:1.3.0"
     const val androidx_test__rules = "androidx.test:rules:1.2.0"
     const val androidx_test_espresso__espresso_core = "androidx.test.espresso:espresso-core:3.2.0"
     const val androidx_test_ext__junit = "androidx.test.ext:junit:1.1.1"

@@ -62,14 +62,12 @@ dependencies {
     testImplementation(Deps.io_mockk__mockk)
     testImplementation(Deps.junit__junit)
 
+    androidTestImplementation(Deps.androidx_test__core_ktx)
     androidTestImplementation(Deps.androidx_test__rules)
     androidTestImplementation(Deps.androidx_test_espresso__espresso_core)
     androidTestImplementation(Deps.androidx_test_ext__junit)
     androidTestImplementation(Deps.com_google_truth__truth)
     androidTestImplementation(Deps.org_assertj__assertj_core)
-
-    // for androidx.test.core.app.launchActivity
-    androidTestImplementation("androidx.test:core-ktx:1.3.0")
 }
 
 tasks {
