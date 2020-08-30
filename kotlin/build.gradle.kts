@@ -2,6 +2,7 @@ plugins {
     Plugin_org_gradle_java_library
     Plugin_org_gradle_maven_publish
     Plugin_org_jetbrains_kotlin_jvm
+    jacoco
 }
 
 tasks {
@@ -37,4 +38,20 @@ afterEvaluate {
             }
         }
     }
+}
+
+// for JaCoCo
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+// 'test' タスク完了時に必ず 'jacocoTestReport' 実行させたい場合はアンコメントしてください。
+// tasks.test {
+//     // report is always generated after tests run
+//     finalizedBy(tasks.jacocoTestReport)
+// }
+
+tasks.jacocoTestReport {
+    // tests are required to run before generating the report
+    dependsOn(tasks.test)
 }
