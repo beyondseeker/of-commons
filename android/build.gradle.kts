@@ -4,6 +4,7 @@ plugins {
     Plugin_org_jetbrains_kotlin_android
     Plugin_kotlin_android_extensions
     Plugin_org_jetbrains_kotlin_kapt
+    jacoco
 }
 
 android {
@@ -21,8 +22,13 @@ android {
 
     buildTypes {
         getByName("release") {
+            isTestCoverageEnabled = true
+
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("debug") {
+            isTestCoverageEnabled = true
         }
     }
 
@@ -92,4 +98,49 @@ afterEvaluate {
             }
         }
     }
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+afterEvaluate {
+    // for 'jacocoTestXxxUnitTestReport' task (e.g. jacocoTestDebugUnitTestReport)
+    android.libraryVariants.forEach { variant ->
+        val variantName = variant.name
+        val capitalizedVariantName = variantName.capitalize()
+        createJacocoReportTask(
+            "jacocoTest${capitalizedVariantName}UnitTestReport",
+            variantName,
+            "Generates code coverage report for the test${capitalizedVariantName}UnitTest task.",
+            "test${capitalizedVariantName}UnitTest"
+        )
+    }
+
+    // for 'jacocoTestReport' task
+    task<JacocoReport>("jacocoTestReport") {
+        android.libraryVariants.forEach { variant ->
+            dependsOn("jacocoTest${variant.name.capitalize()}UnitTestReport")
+        }
+    }
+
+    // for 'jacocoConnectedAndroidTestReport' task
+    createJacocoReportTask(
+        "jacocoConnectedAndroidTestReport",
+        "debug",
+        "Generates code coverage report for the connectedAndroidTest task.",
+        "connectedAndroidTest"
+    )
+
+    // for 'jacocoMergeTestReport' task
+    val testDebugUnitTest = "testDebugUnitTest"
+    val connectedAndroidTest = "connectedAndroidTest"
+    val description = "Generates code coverage report for the $testDebugUnitTest and $connectedAndroidTest tasks."
+    createJacocoReportTask(
+        "jacocoMergeTestReport",
+        "debug",
+        description,
+        testDebugUnitTest,
+        connectedAndroidTest
+    )
 }
