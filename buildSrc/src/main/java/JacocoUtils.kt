@@ -61,17 +61,11 @@ fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, 
 
         // sourceDirectories -------------------------------------------------------------------
 
-        val mainSourceDirectoriesTree =
-            fileTree(mapOf<String?, String>("dir" to "${project.projectDir}/src/main/java"))
-
-        val variantSourceDirectoriesTree =
-            fileTree(mapOf<String?, String>("dir" to "${project.projectDir}/src/${variantName}/java"))
-
+        val mainSourceDirectoryRelativePath = "src/main/java"
+        val variantSourceDirectoryRelativePath = "src/${variantName}/java"
         sourceDirectories.setFrom(
-            files(
-                mainSourceDirectoriesTree,
-                variantSourceDirectoriesTree
-            )
+            mainSourceDirectoryRelativePath,
+            variantSourceDirectoryRelativePath
         )
 
         // executionData -----------------------------------------------------------------------
