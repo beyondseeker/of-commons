@@ -25,14 +25,38 @@ fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, 
 
         // TODO: classDirectoriesTreeExcludes は、除外すべきものを実際に確認しながら対応することにする。
         val classDirectoriesTreeExcludes = setOf(
-            // e.g. class name   : TransformationsUtils$map$$inlined$apply$lambda$1.class
-            //      element      : TransformationsUtils.map..inlined.apply.lambda.new Observer() {...}
-            "**/*\$\$inlined\$*.class"
+            // e.g. class   : TransformationsUtils$map$$inlined$apply$lambda$1.class
+            //      element : TransformationsUtils.map..inlined.apply.lambda.new Observer() {...}
+            "**/*\$\$inlined\$*.class",
+
+            // e.g. class   : androidx/databinding/library/baseAdapters/BR.class
+            //      element : BR
+            "androidx/**/*.class",
+
+            // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl.class
+            //      element : DataBinderMapperImpl
+            "**/DataBinderMapperImpl.class",
+
+            // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl$InnerBrLookup.class
+            //      element : DataBinderMapperImpl.InnerBrLookup
+            "**/DataBinderMapperImpl\$*.class",
+
+            // e.g. class   : <AndroidManifestPackage>/BuildConfig.class
+            //      element : BuildConfig
+            "**/BuildConfig.class",
+
+            // e.g. class   : <AndroidManifestPackage>/BR.class
+            //      element : BR
+            "**/BR.class",
+
+            // e.g. class   : <AndroidManifestPackage>/DataBindingInfo.class
+            //      element : DataBindingInfo
+            "**/DataBindingInfo.class"
+
             //     "**/R.class",
             //     "**/R$*.class",
             //     "**/Manifest*.*",
             //     "android/**/*.*",
-            //     "androidx/**/*.*",
             //     "**/Lambda$*.class",
             //     "**/*\$Lambda$*.*",
             //     "**/Lambda.class",
