@@ -23,23 +23,24 @@ fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, 
         //     xml.isEnabled = false
         // }
 
-        // TODO: classDirectoriesTreeExcludes をどうするのがベストなのかは要検討。
-        val classDirectoriesTreeExcludes = emptySet<String>()
-        // val excludes = setOf(
-        //     "**/R.class",
-        //     "**/R$*.class",
-        //     "**/Manifest*.*",
-        //     "android/**/*.*",
-        //     "androidx/**/*.*",
-        //     "**/Lambda$*.class",
-        //     "**/*\$Lambda$*.*",
-        //     "**/*\$inlined$*.*", // e.g. TransformationsUtils$map$$inlined$apply$lambda$1.class
-        //     "**/Lambda.class",
-        //     "**/*Lambda.class",
-        //     "**/*Lambda*.class",
-        //     "**/*Lambda*.*",
-        //     "**/*Builder.*"
-        // )
+        // TODO: classDirectoriesTreeExcludes は、除外すべきものを実際に確認しながら対応することにする。
+        val classDirectoriesTreeExcludes = setOf(
+            // e.g. class name   : TransformationsUtils$map$$inlined$apply$lambda$1.class
+            //      element      : TransformationsUtils.map..inlined.apply.lambda.new Observer() {...}
+            "**/*\$\$inlined\$*.class"
+            //     "**/R.class",
+            //     "**/R$*.class",
+            //     "**/Manifest*.*",
+            //     "android/**/*.*",
+            //     "androidx/**/*.*",
+            //     "**/Lambda$*.class",
+            //     "**/*\$Lambda$*.*",
+            //     "**/Lambda.class",
+            //     "**/*Lambda.class",
+            //     "**/*Lambda*.class",
+            //     "**/*Lambda*.*",
+            //     "**/*Builder.*"
+        )
 
         // classDirectories --------------------------------------------------------------------
 
