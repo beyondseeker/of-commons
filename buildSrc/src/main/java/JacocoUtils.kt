@@ -45,7 +45,7 @@ fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, 
 
         val javaClassDirectoriesTree = fileTree(
             mapOf(
-                "dir" to "${buildDir}/intermediates/javac/${variantName}/compile${variantName.capitalize()}JavaWithJavac/classes",
+                "dir" to "${buildDir}/intermediates/javac/${variantName}/classes/",
                 "excludes" to classDirectoriesTreeExcludes
             )
         )
