@@ -1,3 +1,5 @@
+import JacocoUtils.createJacocoReportTask
+
 plugins {
     Plugin_org_gradle_maven_publish
     Plugin_com_android_library
@@ -101,7 +103,7 @@ afterEvaluate {
 }
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = JacocoUtils.toolVersion
 }
 
 afterEvaluate {

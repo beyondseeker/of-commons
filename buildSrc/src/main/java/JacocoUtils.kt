@@ -3,107 +3,111 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.task
 import org.gradle.testing.jacoco.tasks.JacocoReport
 
-fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, description: String, vararg testTaskNames: String) {
-    task<JacocoReport>(reportTaskName) {
-        testTaskNames.forEach { testTaskName ->
-            dependsOn(testTaskName)
+object JacocoUtils {
+    const val toolVersion: String = "0.8.5"
 
-            // テストタスク完了時に必ずレポートタスクを実行させたい場合はアンコメントしてください。
-            // report is always generated after tests run
-            // tasks[testTaskName].finalizedBy(tasks[reportTaskName])
-        }
+    fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, description: String, vararg testTaskNames: String) {
+        task<JacocoReport>(reportTaskName) {
+            testTaskNames.forEach { testTaskName ->
+                dependsOn(testTaskName)
 
-        group = "verification"
-        this.description = description
+                // テストタスク完了時に必ずレポートタスクを実行させたい場合はアンコメントしてください。
+                // report is always generated after tests run
+                // tasks[testTaskName].finalizedBy(tasks[reportTaskName])
+            }
 
-        // The following are the default settings for 'reports'
-        // reports {
-        //     csv.isEnabled = false
-        //     html.isEnabled = true
-        //     xml.isEnabled = false
-        // }
+            group = "verification"
+            this.description = description
 
-        // Exclude the class files corresponding to the auto-generated source files.
-        // TODO: 実際に目視確認したもののみを除外していく。(例えば R.class はまだ実際に目視確認してないので除外していない)
-        val classDirectoriesTreeExcludes = setOf(
-            // e.g. class   : androidx/databinding/library/baseAdapters/BR.class
-            //      element : BR
-            "androidx/**/*.class",
+            // The following are the default settings for 'reports'
+            // reports {
+            //     csv.isEnabled = false
+            //     html.isEnabled = true
+            //     xml.isEnabled = false
+            // }
 
-            // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl.class
-            //      element : DataBinderMapperImpl
-            "**/DataBinderMapperImpl.class",
+            // Exclude the class files corresponding to the auto-generated source files.
+            // TODO: 実際に目視確認したもののみを除外していく。(例えば R.class はまだ実際に目視確認してないので除外していない)
+            val classDirectoriesTreeExcludes = setOf(
+                // e.g. class   : androidx/databinding/library/baseAdapters/BR.class
+                //      element : BR
+                "androidx/**/*.class",
 
-            // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl$InnerBrLookup.class
-            //      element : DataBinderMapperImpl.InnerBrLookup
-            "**/DataBinderMapperImpl\$*.class",
+                // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl.class
+                //      element : DataBinderMapperImpl
+                "**/DataBinderMapperImpl.class",
 
-            // e.g. class   : <AndroidManifestPackage>/BuildConfig.class
-            //      element : BuildConfig
-            "**/BuildConfig.class",
+                // e.g. class   : <AndroidManifestPackage>/DataBinderMapperImpl$InnerBrLookup.class
+                //      element : DataBinderMapperImpl.InnerBrLookup
+                "**/DataBinderMapperImpl\$*.class",
 
-            // e.g. class   : <AndroidManifestPackage>/BR.class
-            //      element : BR
-            "**/BR.class",
+                // e.g. class   : <AndroidManifestPackage>/BuildConfig.class
+                //      element : BuildConfig
+                "**/BuildConfig.class",
 
-            // e.g. class   : <AndroidManifestPackage>/DataBindingInfo.class
-            //      element : DataBindingInfo
-            "**/DataBindingInfo.class"
+                // e.g. class   : <AndroidManifestPackage>/BR.class
+                //      element : BR
+                "**/BR.class",
 
-            //     "**/R.class",
-            //     "**/R$*.class",
-            //     "**/Manifest*.*",
-            //     "android/**/*.*",
-            //     "**/Lambda$*.class",
-            //     "**/*\$Lambda$*.*",
-            //     "**/Lambda.class",
-            //     "**/*Lambda.class",
-            //     "**/*Lambda*.class",
-            //     "**/*Lambda*.*",
-            //     "**/*Builder.*"
-        )
+                // e.g. class   : <AndroidManifestPackage>/DataBindingInfo.class
+                //      element : DataBindingInfo
+                "**/DataBindingInfo.class"
 
-        // classDirectories --------------------------------------------------------------------
-
-        val javaClassDirectoriesTree = fileTree(
-            mapOf(
-                "dir" to "${buildDir}/intermediates/javac/${variantName}/classes/",
-                "excludes" to classDirectoriesTreeExcludes
+                //     "**/R.class",
+                //     "**/R$*.class",
+                //     "**/Manifest*.*",
+                //     "android/**/*.*",
+                //     "**/Lambda$*.class",
+                //     "**/*\$Lambda$*.*",
+                //     "**/Lambda.class",
+                //     "**/*Lambda.class",
+                //     "**/*Lambda*.class",
+                //     "**/*Lambda*.*",
+                //     "**/*Builder.*"
             )
-        )
 
-        val kotlinClassDirectoriesTree = fileTree(
-            mapOf(
-                "dir" to "${buildDir}/tmp/kotlin-classes/${variantName}",
-                "excludes" to classDirectoriesTreeExcludes
-            )
-        )
+            // classDirectories --------------------------------------------------------------------
 
-        classDirectories.setFrom(files(javaClassDirectoriesTree, kotlinClassDirectoriesTree))
-
-        // sourceDirectories -------------------------------------------------------------------
-
-        val mainSourceDirectoryRelativePath = "src/main/java"
-        val variantSourceDirectoryRelativePath = "src/${variantName}/java"
-        sourceDirectories.setFrom(
-            mainSourceDirectoryRelativePath,
-            variantSourceDirectoryRelativePath
-        )
-
-        // executionData -----------------------------------------------------------------------
-
-        executionData.setFrom(
-            fileTree(
+            val javaClassDirectoriesTree = fileTree(
                 mapOf(
-                    "dir" to project.projectDir,
-                    "includes" to listOf(
-                        // unit test execution data
-                        "**/*.exec",
-                        // instrumented test execution data
-                        "**/*.ec"
+                    "dir" to "${buildDir}/intermediates/javac/${variantName}/classes/",
+                    "excludes" to classDirectoriesTreeExcludes
+                )
+            )
+
+            val kotlinClassDirectoriesTree = fileTree(
+                mapOf(
+                    "dir" to "${buildDir}/tmp/kotlin-classes/${variantName}",
+                    "excludes" to classDirectoriesTreeExcludes
+                )
+            )
+
+            classDirectories.setFrom(files(javaClassDirectoriesTree, kotlinClassDirectoriesTree))
+
+            // sourceDirectories -------------------------------------------------------------------
+
+            val mainSourceDirectoryRelativePath = "src/main/java"
+            val variantSourceDirectoryRelativePath = "src/${variantName}/java"
+            sourceDirectories.setFrom(
+                mainSourceDirectoryRelativePath,
+                variantSourceDirectoryRelativePath
+            )
+
+            // executionData -----------------------------------------------------------------------
+
+            executionData.setFrom(
+                fileTree(
+                    mapOf(
+                        "dir" to project.projectDir,
+                        "includes" to listOf(
+                            // unit test execution data
+                            "**/*.exec",
+                            // instrumented test execution data
+                            "**/*.ec"
+                        )
                     )
                 )
             )
-        )
+        }
     }
 }

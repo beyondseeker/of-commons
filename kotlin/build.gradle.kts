@@ -42,7 +42,7 @@ afterEvaluate {
 
 // for JaCoCo
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = JacocoUtils.toolVersion
 }
 
 // If you want to generate report always after tests run, please uncomment below.
