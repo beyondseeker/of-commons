@@ -48,15 +48,15 @@ class GetAttrInstrumentedTestActivity : Activity() {
 
 class GetAttrInstrumentedTestView : View {
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        getAttrs(attrs)
+        getAttrs(attrs!!)
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        getAttrs(attrs)
+        getAttrs(attrs!!)
     }
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        getAttrs(attrs)
+        getAttrs(attrs!!)
     }
 
     /**
@@ -71,7 +71,7 @@ class GetAttrInstrumentedTestView : View {
      * (8) getXxxAttr(): デフォルト値が指定されておらず、値に @null がセットされているため、AttributeValueNotFoundException がスローされる。
      * (9) getXxxAttr(): デフォルト値が指定されておらず、値がセットされていないため、AttributeValueNotFoundException がスローされる。
      */
-    private fun getAttrs(attrs: AttributeSet?) {
+    private fun getAttrs(attrs: AttributeSet) {
         // @formatter:off
 
         // boolean
@@ -134,12 +134,12 @@ class GetAttrInstrumentedTestView : View {
     }
 
     private fun <T> assertObject(
-        attrs: AttributeSet?,
+        attrs: AttributeSet,
         defValue: T,
         setValue: T,
-        getAttrWithDef: (attrs: AttributeSet?, styleable: IntArray, index: Int, defValue: T) -> T,
-        getNullableAttr: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> T?,
-        getAttrWithoutDef: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> T,
+        getAttrWithDef: (attrs: AttributeSet, styleable: IntArray, index: Int, defValue: T) -> T,
+        getNullableAttr: (attrs: AttributeSet, styleable: IntArray, index: Int) -> T?,
+        getAttrWithoutDef: (attrs: AttributeSet, styleable: IntArray, index: Int) -> T,
         nonNullValueIndex: Int,
         nonDefValueIndex: Int
     ) {
@@ -158,12 +158,12 @@ class GetAttrInstrumentedTestView : View {
 
     @Suppress("SameParameterValue")
     private fun assertIntArray(
-        attrs: AttributeSet?,
+        attrs: AttributeSet,
         defValue: IntArray,
         setValue: IntArray,
-        getAttrWithDef: (attrs: AttributeSet?, styleable: IntArray, index: Int, defValue: IntArray) -> IntArray,
-        getNullableAttr: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> IntArray?,
-        getAttrWithoutDef: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> IntArray,
+        getAttrWithDef: (attrs: AttributeSet, styleable: IntArray, index: Int, defValue: IntArray) -> IntArray,
+        getNullableAttr: (attrs: AttributeSet, styleable: IntArray, index: Int) -> IntArray?,
+        getAttrWithoutDef: (attrs: AttributeSet, styleable: IntArray, index: Int) -> IntArray,
         nonNullValueIndex: Int,
         nonDefValueIndex: Int
     ) {
@@ -182,12 +182,12 @@ class GetAttrInstrumentedTestView : View {
 
     @Suppress("SameParameterValue")
     private fun <T> assertArray(
-        attrs: AttributeSet?,
+        attrs: AttributeSet,
         defValue: Array<T>,
         setValue: Array<T>,
-        getAttrWithDef: (attrs: AttributeSet?, styleable: IntArray, index: Int, defValue: Array<T>) -> Array<T>,
-        getNullableAttr: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> Array<T>?,
-        getAttrWithoutDef: (attrs: AttributeSet?, styleable: IntArray, index: Int) -> Array<T>,
+        getAttrWithDef: (attrs: AttributeSet, styleable: IntArray, index: Int, defValue: Array<T>) -> Array<T>,
+        getNullableAttr: (attrs: AttributeSet, styleable: IntArray, index: Int) -> Array<T>?,
+        getAttrWithoutDef: (attrs: AttributeSet, styleable: IntArray, index: Int) -> Array<T>,
         nonNullValueIndex: Int,
         nonDefValueIndex: Int
     ) {
