@@ -23,12 +23,9 @@ fun Project.createJacocoReportTask(reportTaskName: String, variantName: String, 
         //     xml.isEnabled = false
         // }
 
-        // TODO: classDirectoriesTreeExcludes は、除外すべきものを実際に確認しながら対応することにする。
+        // Exclude the class files corresponding to the auto-generated source files.
+        // TODO: 実際に目視確認したもののみを除外していく。(例えば R.class はまだ実際に目視確認してないので除外していない)
         val classDirectoriesTreeExcludes = setOf(
-            // e.g. class   : TransformationsUtils$map$$inlined$apply$lambda$1.class
-            //      element : TransformationsUtils.map..inlined.apply.lambda.new Observer() {...}
-            "**/*\$\$inlined\$*.class",
-
             // e.g. class   : androidx/databinding/library/baseAdapters/BR.class
             //      element : BR
             "androidx/**/*.class",
