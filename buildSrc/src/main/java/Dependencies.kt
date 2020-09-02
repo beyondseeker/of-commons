@@ -78,7 +78,7 @@ object Deps {
  * 利用例：
  *   implementation(Project__kotlin)
  */
-val DependencyHandler.Project__kotlin: ProjectDependency get() = project(":kotlin")
+val DependencyHandler.Project__kotlin: ProjectDependency get() = project(":modules:kotlin")
 
 // Plugin ids
 //
