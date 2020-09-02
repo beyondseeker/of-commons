@@ -45,12 +45,13 @@ jacoco {
     toolVersion = "0.8.5"
 }
 
-// 'test' タスク完了時に必ず 'jacocoTestReport' 実行させたい場合はアンコメントしてください。
+// If you want to generate report always after tests run, please uncomment below.
 // tasks.test {
 //     // report is always generated after tests run
 //     finalizedBy(tasks.jacocoTestReport)
 // }
 
+// If you want to run tests always before generating report, please uncomment below.
 tasks.jacocoTestReport {
     // tests are required to run before generating the report
     dependsOn(tasks.test)
