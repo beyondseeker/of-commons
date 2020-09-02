@@ -24,8 +24,6 @@ android {
 
     buildTypes {
         getByName("release") {
-            isTestCoverageEnabled = true
-
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
