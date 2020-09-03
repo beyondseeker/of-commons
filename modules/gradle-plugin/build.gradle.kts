@@ -1,8 +1,11 @@
 plugins {
-    Plugin_org_gradle_java_library
-    Plugin_org_gradle_maven_publish
+    Plugin_org_gradle_java_gradle_plugin
     Plugin_org_jetbrains_kotlin_jvm
-    jacoco
+    Plugin_org_gradle_maven_publish
+}
+
+dependencies {
+    implementation(Deps.org_jetbrains_kotlin__kotlin_stdlib_jdk8)
 }
 
 tasks {
@@ -18,9 +21,15 @@ tasks {
     }
 }
 
-dependencies {
-    implementation(Deps.org_jetbrains_kotlin__kotlin_stdlib_jdk8)
-    testImplementation(Deps.junit__junit)
+gradlePlugin {
+    plugins {
+        create("dynamicModulesPlugin") {
+            id = "com.objectfanatics.gradle.plugin.dynamicmodulesplugin"
+            displayName = "dynamicModulesPlugin"
+            description = "This plugin registers the folders where \"build.gradle\" or \"build.gradle.kts\" exists except for rootDir and buildSrc dir as gradle projects."
+            implementationClass = "com.objectfanatics.commons.com.objectfanatics.gradle.plugin.DynamicModulesPlugin"
+        }
+    }
 }
 
 afterEvaluate {
@@ -33,26 +42,9 @@ afterEvaluate {
                 from(components["java"])
                 artifact(tasks["sourcesJar"])
                 groupId = "com.objectfanatics"
-                artifactId = "commons-kotlin"
+                artifactId = "gradle-plugin-dynamicmodulesplugin"
                 version = ReleaseUtils.version
             }
         }
     }
-}
-
-// for JaCoCo
-jacoco {
-    toolVersion = JacocoUtils.toolVersion
-}
-
-// If you want to generate report always after tests run, please uncomment below.
-// tasks.test {
-//     // report is always generated after tests run
-//     finalizedBy(tasks.jacocoTestReport)
-// }
-
-// If you want to run tests always before generating report, please uncomment below.
-tasks.jacocoTestReport {
-    // tests are required to run before generating the report
-    dependsOn(tasks.test)
 }

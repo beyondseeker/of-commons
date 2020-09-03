@@ -30,8 +30,3 @@
 
 # MAC OS上の不可視ファイル。commit されるべきではない。
 .DS_Store
-
-### of-commons ###
-
-# publish task による maven repository の出力先
-/repository

@@ -1,0 +1,2 @@
+# gradle の build 成果物用フォルダ。build により自動生成されるものなので commit されるべきではない。
+/build

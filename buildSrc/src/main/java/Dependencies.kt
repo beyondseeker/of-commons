@@ -4,9 +4,9 @@ import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
 /**
- * 複数個所で利用されるバージョン情報
+ * 複数個所で利用されるバージョン情報(private)
  */
-private object Versions {
+private object PrivateVersions {
     const val activity = "1.2.0-alpha06"
     const val kotlin = "1.3.72"
     const val arch = "2.1.0"
@@ -25,7 +25,7 @@ private object Versions {
  */
 object Classpaths {
     const val com_android_tools_build__gradle = "com.android.tools.build:gradle:4.0.1"
-    const val org_jetbrains_kotlin__kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val org_jetbrains_kotlin__kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${PrivateVersions.kotlin}"
 }
 
 /**
@@ -42,10 +42,10 @@ object Classpaths {
  *   androidTestImplementation(Deps.androidx_test_espresso__espresso_core)
  */
 object Deps {
-    const val androidx_activity__activity = "androidx.activity:activity:${Versions.activity}"
-    const val androidx_activity__activity_ktx = "androidx.activity:activity-ktx:${Versions.activity}"
+    const val androidx_activity__activity = "androidx.activity:activity:${PrivateVersions.activity}"
+    const val androidx_activity__activity_ktx = "androidx.activity:activity-ktx:${PrivateVersions.activity}"
     const val androidx_appcompat__appcompat = "androidx.appcompat:appcompat:1.1.0"
-    const val androidx_arch_core__core_testing = "androidx.arch.core:core-testing:${Versions.arch}"
+    const val androidx_arch_core__core_testing = "androidx.arch.core:core-testing:${PrivateVersions.arch}"
     const val androidx_constraintlayout__constraintlayout = "androidx.constraintlayout:constraintlayout:1.1.3"
     const val androidx_core__core_ktx = "androidx.core:core-ktx:1.3.0"
     const val androidx_fragment__fragment = "androidx.fragment:fragment:1.3.0-alpha06" // 1.3.0-alpha06 より前のバージョンだと、registerForActivityResult を利用した際に 'java.lang.IllegalArgumentException: Can only use lower 16 bits for requestCode' というエラーで落ちるので注意！
@@ -60,8 +60,8 @@ object Deps {
     const val io_mockk__mockk = "io.mockk:mockk:1.10.0"
     const val junit__junit = "junit:junit:4.12"
     const val org_assertj__assertj_core = "org.assertj:assertj-core:3.12.2"
-    const val org_jetbrains_kotlin__kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-    const val org_jetbrains_kotlin__kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    const val org_jetbrains_kotlin__kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${PrivateVersions.kotlin}"
+    const val org_jetbrains_kotlin__kotlin_stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${PrivateVersions.kotlin}"
 }
 
 /**

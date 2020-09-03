@@ -86,7 +86,7 @@ tasks {
 afterEvaluate {
     publishing {
         repositories.maven {
-            url = uri("$rootDir/repository")
+            url = uri("$rootDir/${ReleaseUtils.repoDirName}")
         }
         publications {
             create<MavenPublication>("maven") {
@@ -94,7 +94,7 @@ afterEvaluate {
                 artifact(tasks["androidSourcesJar"])
                 groupId = "com.objectfanatics"
                 artifactId = "commons-android"
-                version = "0.0.1-SNAPSHOT"
+                version = ReleaseUtils.version
             }
         }
     }
