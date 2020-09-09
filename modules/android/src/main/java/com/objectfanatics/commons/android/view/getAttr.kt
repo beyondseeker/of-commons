@@ -5,6 +5,8 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 
+// FIXME:Drawable, color, dimension 等も対応すべき。
+
 // public exception
 class AttributeValueNotFoundException : IllegalStateException("This attr must be set. Please set attr in layout file or set default value")
 
