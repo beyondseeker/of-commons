@@ -5,6 +5,7 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 
+// FIXME: com.objectfanatics.commons.android.view.getAttr package に移動すべき。直下だと、ファイルを分けようと思った場合などに構造の変更が必要になってしまうので保守時の影響範囲が大きくなってしまう。
 // FIXME:Drawable, color, dimension 等も対応すべき。
 
 // public exception
