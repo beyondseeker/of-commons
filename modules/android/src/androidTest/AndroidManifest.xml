@@ -3,5 +3,6 @@
     package="com.objectfanatics.commons.android">
     <application>
         <activity android:name=".view.GetAttrInstrumentedTestActivity" />
+        <activity android:name=".widget.textView.linkClickListenable.LinkClickListenableInstrumentedTestActivity1" />
     </application>
 </manifest>

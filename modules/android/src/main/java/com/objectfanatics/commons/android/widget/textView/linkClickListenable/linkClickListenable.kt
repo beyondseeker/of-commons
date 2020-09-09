@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 
-// FIXME: コード精査とユニットテスト
+// FIXME: コード精査とユニットテストちゃんとやりましょう。
 fun TextView.setLinkClickListenable(html: String, onLinkClick: (url: String) -> Boolean) {
     text = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_COMPACT)
     movementMethod = ClickListenableLinkMovementMethod(onLinkClick)
