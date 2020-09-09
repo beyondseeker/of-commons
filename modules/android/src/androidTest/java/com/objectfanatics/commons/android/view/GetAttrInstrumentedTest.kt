@@ -42,7 +42,7 @@ class GetAttrInstrumentedTest {
 class GetAttrInstrumentedTestActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.android_view_get_attr_instrumented_test_activity)
+        setContentView(R.layout.android_view_getattrinstrumentedtestactivity)
     }
 }
 
