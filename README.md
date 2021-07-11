@@ -2,7 +2,11 @@
 
 # Internal Memo
 FIXME: とりあえず暫定の手動対応の手順。変数用いて共通スクリプト化したほうがよさげ。こなれるまでは gradle task 等にはしないで手動で走らせましょう。世の中の汎用的な手順があるなら取り入れましょう。要調査。
-## How to Release
+
+## How to Release 'SNAPSHOT' version
+Execute `./gradlew clean publishToMavenLocal`
+
+## How to Release `RELEASE` version
 - Move to develop branch.
 - Remove `-SNAPSHOT` from `Versions.ofCommonsRelease`
 - Execute `./gradlew clean publishMavenPublicationToMavenRepository`
